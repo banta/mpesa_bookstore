@@ -1,0 +1,53 @@
+<p>
+<h1><%=h @books_category.name %> Category</h1>
+</p>
+
+<p>
+<h2>Description</h2><br/>
+<%=h @books_category.description %>
+</p>
+
+<div id="books-list">
+  <h1>Listing books belonging to the category</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <% @books_category.books.each do |book| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%= image_tag ("/books_pics/#{book.picture}"), :class => 'list-image' %></td>
+        <td><%=h book.name %></td>
+        <td><%=h book.author %></td>
+        <td><%=h book.description %></td>
+        <td><%=h book.isbn %></td>
+        <td><span class="price" ><%= number_to_currency(book.price, :unit=> "KSh. ") %></span></td>
+        <td><%= link_to image_tag("app/b_view.png" ), book %></td>
+        <td><%= link_to image_tag("app/b_edit.png" ), edit_book_path(book) %></td>
+        <td><%= link_to image_tag("app/b_drop.png" ), book, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div id="books-list">
+  <h1>Listing free books</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <% @books_category.free_books.each do |free_book| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%= link_to "#{image_tag "/fbooks_pics/#{free_book.picture}", :class => 'list-image'}", "/fbooks_st/#{free_book.book_url}" %></td>
+        <td><%=h free_book.title %></td>
+        <td><%=h free_book.book_url %></td>
+        <td><%=h free_book.author %></td>
+        <td><%=h truncate(free_book.description.gsub(/<.*?>/,''), 80) %></td>
+
+        <td><%= link_to "#{image_tag("app/b_view.png" )}", free_book %></td>
+        <td><%= link_to "#{image_tag("app/b_edit.png" )}", edit_free_book_path(free_book) %></td>
+        <td><%= link_to "#{image_tag("app/b_drop.png" )}", free_book, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<b>
+  <%= link_to 'Edit Category', edit_books_category_path(@books_category) %> |
+  <%= link_to 'Back', books_categories_path %>
+</b>

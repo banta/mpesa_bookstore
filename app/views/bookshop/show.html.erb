@@ -1,0 +1,36 @@
+<div class="entry">
+  <table>
+    <thead
+      <tr><h3><%=  @book.name %></h3></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <p>
+            <%= image_tag ("/books_pics/#{@book.picture}") %>
+          </p>
+        </td>
+        <td ><%= @book.description %><br/></td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <td><span class="price" ><b>ISBN:       </b><%= @book.isbn %></span></td>
+      </tr>
+      <tr>
+        <td><span class="price" ><b>Price:      </b><%= number_to_currency(@book.price, :unit=> "KSh. ") %></span></td>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<b>
+  <%= link_to 'Back', :controller => :bookshop, :action => 'index'  %> |
+  <% if session[:user_id] %>
+    <% form_remote_tag :url => {:action => "add_to_cart", :id => @book} do %>
+      <%= submit_tag 'Add book to shopping cart' %>
+    <% end %>
+  <% end %>
+</b>

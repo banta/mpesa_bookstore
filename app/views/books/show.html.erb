@@ -1,0 +1,34 @@
+<div id="books-list">
+  <p>
+    <%= image_tag ("/books_pics/#{@book.picture}"), :class => 'list-image' %>
+  </p>
+</div>
+
+<p>
+  <b>Name:</b>
+  <%=h @book.name %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%=h @book.author %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @book.description %>
+</p>
+
+<p>
+  <b>Isbn:</b>
+  <%=h @book.isbn %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%=h @book.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

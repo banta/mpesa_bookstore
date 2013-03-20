@@ -1,0 +1,26 @@
+<div id="books-list">
+  <h1>Listing found books</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <% @books.each do |book| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%= image_tag ("/books_pics/#{book.picture}"), :class => 'list-image' %></td>
+        <td><%=h book.name %></td>
+        <td><%=h book.author %></td>
+        <td><%=h truncate(book.description.gsub(/<.*?>/,''), 80) %></td>
+        <td><%=h book.isbn %></td>
+        <td><span class="price" ><%= number_to_currency(book.price, :unit=> "KSh. ") %></span></td>
+
+        <td><%= link_to "#{image_tag("app/b_view.png" )}", book %></td>
+        <td><%= link_to "#{image_tag("app/b_edit.png" )}", edit_book_path(book) %></td>
+        <td><%= link_to "#{image_tag("app/b_drop.png" )}", book, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br />
+
+<b>
+  <%= link_to 'New book', new_book_path %>
+</b>

@@ -1,0 +1,34 @@
+<div id="books-list">
+  <h1>Listing free books</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Picture</th>
+      <th>Title</th>
+      <th>Book url</th>
+      <th>Author</th>
+      <th>Description</th>
+    </tr>
+
+    <% @free_books.each do |free_book| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%= link_to "#{image_tag "/fbooks_pics/#{free_book.picture}", :class => 'list-image'}", "/fbooks_st/#{free_book.book_url}" %></td>
+        <td><%=h free_book.title %></td>
+        <td><%=h free_book.book_url %></td>
+        <td><%=h free_book.author %></td>
+        <td><%=h truncate(free_book.description.gsub(/<.*?>/,''), 80) %></td>
+
+        <td><%= link_to "#{image_tag("app/b_view.png" )}", free_book %></td>
+        <td><%= link_to "#{image_tag("app/b_edit.png" )}", edit_free_book_path(free_book) %></td>
+        <td><%= link_to "#{image_tag("app/b_drop.png" )}", free_book, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+
+    <% end %>
+  </table>
+</div>
+
+<br />
+
+<b>
+  <%= link_to 'New free_book', new_free_book_path %>
+</b>

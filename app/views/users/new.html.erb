@@ -1,0 +1,58 @@
+<b>RECOMMENDED: Please read below before you register</b>
+<h1>Please register</h1>
+
+<div class="bookstore-form">
+  <%= error_messages_for "user" %>
+
+  <fieldset>
+    <legend>Please Enter Your Information</legend>
+    <% form_for(@user) do |f| %>
+
+      <b>
+        <p>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </p>
+        <p>
+          <label for="mpesa_no">Mpesa no. +</label>
+          <%= f.text_field :mpesa_no %>
+        </p>
+        <p>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+        </p>
+        <p>
+          <%= f.label :address %>
+          <%= f.text_field :address %>
+        </p>
+        <p>
+          <%= f.label :town %>
+          <%= f.text_field :town %>
+        </p>
+        <p>
+          <label for="user_password">Password:</label>
+          <%= f.password_field :password %>
+        </p>
+
+        <p>
+          <label for="user_password_confirmation">Confirm:</label>
+          <%= f.password_field :password_confirmation %>
+        </p>
+      </b>
+      <p>
+        <%= f.submit 'Create', :class => "submit" %>
+      </p>
+    <% end %>
+  </fieldset>
+</div>
+
+<p><b style="color:red;text-decoration:underline;">NOTE:</b><br/>
+  - Name should be the exact name that you are using in M-pesa<br/>
+  - M-pesa should start with 254.. e.g. 254711222333<br/>
+  - E-mail, M-pesa number are unique<br/>
+  - You'll use your e-mail to login to the system.
+  - Address should be a physical address where the books can be delivered.<br/>
+  - Town should be the closest town to you.<br/>
+
+</p>
+<%= link_to 'Back', users_path %>

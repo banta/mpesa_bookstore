@@ -1,0 +1,26 @@
+<h1>User Login</h1>
+<br/>
+<div class="bookstore-form">
+  <fieldset>
+    <legend>Please Log In</legend>
+    <% form_tag do %>
+      <b>
+        <p>
+          <label for="email">E-mail:</label>
+          <%= text_field_tag :email, params[:email] %>
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <%= password_field_tag :password, params[:password] %>
+        </p>
+      </b>
+      <p>
+        <%= submit_tag "Login", :class => "submit" %>
+      </p>
+    <% end %>
+  </fieldset>
+</div>
+
+<b>
+  <%= link_to 'Sign Up', new_user_path %> | <%= link_to "Admin", :controller => :admin, :action => 'login'  %>
+</b>

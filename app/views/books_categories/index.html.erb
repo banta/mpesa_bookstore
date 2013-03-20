@@ -1,0 +1,25 @@
+<div id="books-list">
+  <h1>Listing Book Categories</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <% @books_categories.each do |books_category| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+      <td><b><%=h link_to "#{books_category.name}", books_category %></b></td>
+      <td><%=h truncate(books_category.description.gsub(/<.*?>/,''), 80) %></td>
+      <td><%= link_to image_tag("app/b_view.png" ), books_category %></td>
+      <td><%= link_to image_tag("app/b_edit.png" ), edit_books_category_path(books_category) %></td>
+      <td><%= link_to image_tag("app/b_drop.png" ), books_category, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br />
+<b>
+  <%= link_to 'New books_category', new_books_category_path %>
+</b>

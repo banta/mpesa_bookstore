@@ -1,0 +1,25 @@
+<div id="books-list">
+  <h1>Listing all transactions</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Order no.</th>
+      <th>Customer name</th>
+      <th>Customer number</th>
+      <th>Order amount</th>
+      <th>Order status</th>
+      <th>Order date</th>
+    </tr>
+
+    <% @transactions.each do |transaction| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%=h transaction.order_id %></td>
+        <td><%=h link_to transaction.name, :action => "s_transac", :id => transaction.order_id %></td>
+        <td>+<%=h transaction.pnumber %></td>
+        <td><%= number_to_currency(transaction.amount, :unit=> "KSh. ") %></td>
+        <td><%=h transaction.status %></td>
+        <td><%=h transaction.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

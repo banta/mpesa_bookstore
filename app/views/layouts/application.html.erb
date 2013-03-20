@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+
+<html>
+  <head>
+    <title>Online Rails Bookstore Application</title>
+    <%= stylesheet_link_tag "bookstore" , :media => "all" %>
+    <%= javascript_include_tag :defaults %>
+
+    <script type="text/javascript">
+      <!--
+      var timeout         = 500;
+      var closetimer		= 0;
+      var ddmenuitem      = 0;
+
+      // open hidden layer
+      function mopen(id)
+      {
+        // cancel close timer
+        mcancelclosetime();
+
+        // close old layer
+        if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+        // get new layer and show it
+        ddmenuitem = document.getElementById(id);
+        ddmenuitem.style.visibility = 'visible';
+
+      }
+      // close showed layer
+      function mclose()
+      {
+        if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+      }
+
+      // go close timer
+      function mclosetime()
+      {
+        closetimer = window.setTimeout(mclose, timeout);
+      }
+
+      // cancel close timer
+      function mcancelclosetime()
+      {
+        if(closetimer)
+        {
+          window.clearTimeout(closetimer);
+          closetimer = null;
+        }
+      }
+
+      // close layer when click-out
+      document.onclick = mclose;
+      // -->
+    </script>
+  </head>
+  <body id="store" >
+
+    <div style="clear:both"></div>
+    <div id="banner">
+      <%= image_tag("/images/app/logo.png") %>
+      <%= @page_title || "Online Rails Bookstore Application" %>
+      <ul id="sddm">
+        <li><b onmouseover="mopen('m1')" onmouseout="mclosetime()"><%= link_to "Home", :controller => :home, :action => 'index'  %></b>
+          <div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m2')" onmouseout="mclosetime()"><%= link_to "About", :controller => :home, :action => 'about'  %><br/></b>
+          <div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m3')" onmouseout="mclosetime()"><%= link_to "Contact Us", :controller => :home, :action => 'contact'  %></b>
+          <div id="m3" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m4')" onmouseout="mclosetime()"><%= link_to "Download Materials", :controller => :bookshop, :action => :downl_fmaterials  %></b>
+          <div id="m4" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m5')" onmouseout="mclosetime()"><%= link_to "Upload materials", :controller => :free_books, :action => 'new'  %></b>
+          <div id="m5" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m6')" onmouseout="mclosetime()"><%= link_to 'Shop for books', :controller => :bookshop, :action => 'index'  %></b>
+          <div id="m6" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+          </div>
+        </li>
+        <li><b onmouseover="mopen('m7')" onmouseout="mclosetime()">
+            <% if session[:user_id].nil? %>
+              <%= link_to 'LogIn', :controller => :log_user, :action => 'u_login' %><br/>
+            <% else %>
+              <%= link_to 'Logout', :controller => :log_user, :action => 'u_logout' %><br/>
+            <% end %>
+            <div id="m7" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+            </div>
+          </b>
+        </li>
+      </ul>
+    </div>
+    <div id="columns">
+      <div id="side">
+
+
+
+        <% if session[:administrator_id] %>
+          <h3 style="color:white;" >Administrator links</h3>
+          <b>
+            <%= link_to 'Add New Administrator', :controller => :administrators, :action => 'new' %><br/>
+            <%= link_to 'View Administrators', :controller => :administrators, :action => 'index' %><br/>
+            <%= link_to 'View Users', :controller => :users, :action => 'index' %><br/>
+            <%= link_to 'Book Category', books_categories_path %><br/>
+            <%= link_to 'Books', books_path %><br/>
+            <%= link_to 'Free Books', free_books_path %><br/>
+            <%= link_to 'Orders',  :controller => :order_trn, :action => 'transc' %><br/>
+            <%= link_to 'View Sent SMS',  :controller => :order_trn, :action => 'sms_st' %><br/>
+            <%= link_to 'View Inbox SMS',  :controller => :order_trn, :action => 'sms_in' %><br/>
+  <%#= link_to 'Compose an sms',  :controller => :orders, :action => 'sms_cmp' %><br/>
+            <%= link_to 'Logout', :controller => :admin, :action => 'logout' %>
+          </b>
+        <% end %>
+
+        <br/>
+        <br/>
+        <% if session[:administrator_id] %>
+          <div id="search">
+            <%= render :partial => 'books/search' %><br/>
+          </div>
+        <% end %>
+
+        <br/>
+        <br/>
+
+
+      </div>
+      <div id="main">
+        <% if flash[:notice] -%>
+          <div id="notice"><%= flash[:notice] %></div>
+        <% end -%>
+
+        <%= yield :layout %>
+        <br/>
+        <br/>
+        <hr/>
+        <div id="footer" class="smallgraytext">
+          <%= link_to "Home", :controller => :home, :action => 'index'  %> | <%= link_to "About", :controller => :home, :action => 'about'  %> | <%= link_to "Contact Us", :controller => :home, :action => 'contact'  %>
+				| <%= link_to "Terms and Conditions", :controller => :home, :action => 'terms'  %> | Banta &copy; 2011
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

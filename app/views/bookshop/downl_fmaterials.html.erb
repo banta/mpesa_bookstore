@@ -1,0 +1,41 @@
+<h1>Listing free books for download</h1> Click on the picture to download.
+
+<div id="books-list">
+  <h3>Book Categories</h3>
+  <table cellpadding="5" cellspacing="0">
+    <% @books_categories.each do |books_category| %>
+      <tr>
+        <td><b><a href="http://localhost:3000/bookshop/show_dcat/<%=h books_category.id %>" ><%=h books_category.name %></a></b></td>
+        <td><%=h truncate(books_category.description.gsub(/<.*?>/,''), 80) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<hr/>
+
+<% @free_books.each do |free_book| %>
+  <div class="entry">
+    <table>
+      <thead
+        <tr><h3><%=h free_book.title %> By <%=h free_book.author %><br/></h3></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>
+              <%= link_to "#{image_tag "/fbooks_pics/#{free_book.picture}", :class => 'list-image'}", "/fbooks_st/#{free_book.book_url}" %>
+            </p>
+          </td>
+          <td ><%= free_book.description %><br/></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <td><span class="price" ><%= link_to "Download", "/fbooks_st/#{free_book.book_url}" %></span></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<h1><%=h @books_category.name %> Category</h1>
+
+<% @books_category.free_books.each do |free_book| %>
+  <div class="entry">
+    <table>
+      <thead
+        <tr><h3><%= free_book.title %> By <%=h free_book.author %></h3></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>
+              <%= link_to "#{image_tag "/fbooks_pics/#{free_book.picture}", :class => 'list-image'}", "/fbooks_st/#{free_book.book_url}" %>
+            </p>
+          </td>
+          <td ><%=  free_book.description %><br/></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <td><span class="price" ><%= link_to "Download", "/fbooks_st/#{free_book.book_url}" %></span></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+<% end %>
+<br/>
+<br/>
+<b>
+  <%= link_to 'Back', :controller => :bookshop, :action => 'downl_fmaterials'  %>
+</b>

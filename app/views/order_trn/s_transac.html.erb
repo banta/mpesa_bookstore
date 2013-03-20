@@ -1,0 +1,29 @@
+<div id="books-list">
+  <h1>Listing books in the order</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <th>Book name</th>
+    <th>Book price</th>
+    <th>Quantity</th>
+    <th>Sub-Total</th>
+    <% @order.line_items.each do |linei| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%=h Book.find(linei.book_id).name %></td>
+        <td><%=h number_to_currency(Book.find(linei.book_id).price, :unit=> "KSh. ") %></td>
+        <td><%=h linei.quantity%></td>
+        <td><%=h number_to_currency(linei.total_price, :unit=> "KSh. ")%></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><strong style="color:blue;" >Total Price</strong></td>
+      <td><strong style="color: violet;" ><%=h number_to_currency(LineItem.sum(:total_price, :conditions => {:order_id => (@order.id)}), :unit=> "KSh. ") %></strong></td>
+    </tr>
+  </table>
+</div>
+<br/>
+<br/>
+<b>
+  <%= link_to 'Back', :controller => :orders, :action => :index %>
+</b>

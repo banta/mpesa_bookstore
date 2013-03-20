@@ -1,0 +1,31 @@
+<div id="books-list">
+  <h1>Listing users</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Name</th>
+      <th>Mpesa no</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Town</th>
+    </tr>
+
+    <% @users.each do |user| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%=h link_to user.name, :controller => :users, :action => :show ,:id => user %></td>
+        <td>+<%=h user.mpesa_no %></td>
+        <td><%=h user.email %></td>
+        <td><%=h user.address %></td>
+        <td><%=h user.town %></td>
+
+      <td><%= link_to "#{image_tag("app/b_view.png" )}", user %></td>
+      <td><%= link_to "#{image_tag("app/b_edit.png" )}", edit_user_path(user) %></td>
+      <td><%= link_to "#{image_tag("app/b_drop.png" )}", user, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br />
+
+<%= link_to 'New user', new_user_path %>

@@ -1,0 +1,36 @@
+<h1>New administrator</h1>
+
+<div class="bookstore-form">
+
+  <%= error_messages_for "administrator" %>
+
+  <fieldset>
+    <legend>Please Enter Administrator Information</legend>
+    <% form_for(@administrator) do |f| %>
+
+      <b>
+        <p>
+          <label for="administrator_name">Name:</label>
+          <%= f.text_field :name %>
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <%= f.text_field :email %>
+        </p>
+        <p>
+          <label for="administrator_password">Password:</label>
+          <%= f.password_field :password %>
+        </p>
+        <p>
+          <label for="administrator_password_confirmation">Confirm:</label>
+          <%= f.password_field :password_confirmation %>
+        </p>
+      </b>
+      <p>
+        <%= f.submit 'Add administrator', :class => "submit" %>
+      </p>
+    <% end %>
+  </fieldset>
+</div>
+
+<%= link_to 'Back', administrators_path %>

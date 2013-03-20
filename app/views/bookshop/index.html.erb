@@ -1,0 +1,57 @@
+You are   : <%=User.find(session[:user_id]).name%><br/>
+M-Pesa no.: <%=  User.find(session[:user_id]).mpesa_no %><br/>
+<p>
+<div id="search" style="margin-left:6em; border:1px solid white;border-radius: 40px 40px 40px 40px;" >
+  <%= render :partial => 'bookshop/bsearch' %><br/>
+</div>
+</p>
+<br/>
+
+<h1>Books for sale</h1>
+
+<div id="books-list">
+  <h3>Book Categories</h3>
+  <table cellpadding="5" cellspacing="0">
+    <% @books_categories.each do |books_category| %>
+      <tr>
+        <td><b><a href="http://localhost:3000/bookshop/showcat/<%=h books_category.id %>" ><%=h books_category.name %></a></b></td>
+        <td><%=h truncate(books_category.description.gsub(/<.*?>/,''), 80) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<hr/>
+
+<% for book in @books -%>
+  <div class="entry">
+    <table>
+      <thead
+        <tr><h3><%=  link_to book.name, :action => "show", :id => book %></h3></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>
+              <%= image_tag ("/books_pics/#{book.picture}") %>
+            </p>
+          </td>
+          <td style=" color: blueviolet;" ><%= truncate(book.description.gsub(/<.*?>/,''), 400) %><br/></td>
+        </tr>
+      </tbody>
+    </table>
+    <% if session[:user_id] %>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <% form_remote_tag :url => {:action => "add_to_cart", :id => book} do %>
+                <%= submit_tag 'Add book to shopping cart' %>
+              <% end %>
+            </td>
+            <td><span class="price" ><%= number_to_currency(book.price, :unit=> "KSh. ") %></span></td>
+          </tr>
+        </thead>
+      </table>
+    <% end %>
+  </div>
+<% end %>

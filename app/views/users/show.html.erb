@@ -1,0 +1,28 @@
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Mpesa no:</b>
+  +<%=h @user.mpesa_no %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @user.address %>
+</p>
+
+<p>
+  <b>Town:</b>
+  <%=h @user.town %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

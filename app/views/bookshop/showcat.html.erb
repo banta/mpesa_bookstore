@@ -1,0 +1,36 @@
+
+<h1><%=h @books_category.name %> Category</h1>
+
+<%@books_category.books.each do |book|  -%>
+  <div class="entry">
+    <table>
+      <thead
+        <tr><h3><%=  link_to book.name, :action => "show", :id => book %></h3></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>
+              <%= image_tag ("/books_pics/#{book.picture}") %>
+            </p>
+          </td>
+          <td style=" color: blueviolet;" ><%= truncate(book.description.gsub(/<.*?>/,''), 400) %><br/></td>
+        </tr>
+      </tbody>
+    </table>
+    <% if session[:user_id] %>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <% form_remote_tag :url => {:action => "add_to_cart", :id => book} do %>
+                <%= submit_tag 'Add book to shopping cart' %>
+              <% end %>
+            </td>
+            <td><span class="price" ><%= number_to_currency(book.price, :unit=> "KSh. ") %></span></td>
+          </tr>
+        </thead>
+      </table>
+    <% end %>
+  </div>
+<% end %>

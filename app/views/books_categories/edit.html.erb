@@ -1,0 +1,30 @@
+<h1>Editing Category</h1>
+<div class="bookstore-form">
+  <%= error_messages_for "books_category" %>
+
+  <fieldset>
+    <legend>Please Edit Category</legend>
+
+    <% form_for(@books_category) do |f| %>
+
+      <b>
+        <p>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </p>
+        <p>
+          <%= f.label :description %>
+          <%= f.text_area :description, :rows => 3, :cols => 40 %>
+        </p>
+        <p>
+          <%= f.submit 'Update', :class => "submit" %>
+        </p>
+      </b>
+    <% end %>
+  </fieldset>
+</div>
+
+<b>
+  <%= link_to 'Show', @books_category %> |
+  <%= link_to 'Back', books_categories_path %>
+</b>

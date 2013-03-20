@@ -1,0 +1,28 @@
+<p>
+  <b>Picture:</b>
+  <%=h @free_book.picture %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @free_book.title %>
+</p>
+
+<p>
+  <b>Book url:</b>
+  <%=h @free_book.book_url %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%=h @free_book.author %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @free_book.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_free_book_path(@free_book) %> |
+<%= link_to 'Back', free_books_path %>

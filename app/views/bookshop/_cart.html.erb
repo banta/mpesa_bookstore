@@ -1,0 +1,18 @@
+<% unless cart.items.empty? %>
+  <div class="cart-title">Your Shopping Cart</div>
+  <table>
+    <%= render(:partial => "cart_item" , :collection => cart.items) %>
+    <tr class="total-line">
+      <td colspan="2">Total</td>
+      <td class="total-cell"><%= number_to_currency(cart.total_price, :unit=> "KSh. ") %></td>
+    </tr>
+  </table>
+  <table >
+    <br/>
+    <br/>
+    <tr >
+      <td><%= button_to "Empty the cart" , :action => :empty_cart %></td>&thinsp;
+      <td><%= button_to "Purchase books" , :action => :save_order %></td>
+    </tr>
+  </table>
+<% end %>

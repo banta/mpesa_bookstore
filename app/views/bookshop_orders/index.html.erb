@@ -1,0 +1,17 @@
+<div id="books-list">
+  <h1>Listing users</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Order Id</th>
+    </tr>
+
+    <% @status_orders.each do |sorder| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%#=h sorder.id %></td>
+        <td><%=h sorder.order_id %></td>
+        <td><%=h Order.all(:all, :conditions => {:id => (sorder.order_id)}) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

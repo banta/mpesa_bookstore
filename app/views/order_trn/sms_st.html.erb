@@ -1,0 +1,20 @@
+<div id="books-list">
+  <h1>Listing all sent sms</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Customer number</th>
+      <th>Message</th>
+      <th>Sent time</th>
+    </tr>
+
+    <% @ozekimessageouts.each do |ozekimessageout| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%=h ozekimessageout.receiver %></td>
+        <td><%=h ozekimessageout.msg %></td>
+        <td><%=h ozekimessageout.senttime %></td>
+
+      </tr>
+    <% end %>
+  </table>
+</div>

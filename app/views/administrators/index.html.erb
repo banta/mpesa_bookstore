@@ -1,0 +1,25 @@
+<div id="books-list">
+  <h1>Listing administrators</h1>
+
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>Name</th>
+    </tr>
+
+    <% @administrators.each do |administrator| %>
+      <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%=h administrator.name %></td>
+        <td><%=h administrator.email %></td>
+        <td><%= link_to "#{image_tag("app/b_view.png" )}", administrator %></td>
+        <td><%= link_to "#{image_tag("app/b_edit.png" )}", edit_administrator_path(administrator) %></td>
+        <td><%= link_to "#{image_tag("app/b_drop.png" )}", administrator, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br />
+
+<b>
+  <%= link_to 'New administrator', new_administrator_path %>
+</b>

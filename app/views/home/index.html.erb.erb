@@ -1,0 +1,16 @@
+<script type="text/javascript" src="/images/flashobject.js"></script>
+<div id="jij" >
+  <div id="flashcontent"></div>
+  <%= @page_title || "Welcome To A Green Bookstore" %>
+</div>
+
+<script type="text/javascript">
+  var fo = new FlashObject("images/comet.swf", "animationName", "500", "70", "5", "#FFFFFF");
+  fo.addParam("allowScriptAccess", "sameDomain");
+  fo.addParam("quality", "high");
+  fo.addParam("scale", "noscale");
+  fo.addParam("loop", "true");
+  fo.write("flashcontent");
+</script>
+
+<h2><%= image_tag("app/bookstore.jpg") %></h2>

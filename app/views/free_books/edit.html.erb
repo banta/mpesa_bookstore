@@ -1,0 +1,47 @@
+<h1>Editing Free Book</h1>
+
+<div class="bookstore-form">
+  <%= error_messages_for "free_book" %>
+
+  <fieldset>
+    <legend>Please Edit Book Information</legend>
+
+    <% form_for(@free_book) do |f| %>
+
+      <b>
+        <p>
+          <%= f.label :picture %>
+          <%= f.text_field :picture %>
+        </p>
+        <p>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </p>
+        <p>
+          <%= f.label :books_category_id, "Category" %>
+          <%= select("free_book", "books_category_id", BooksCategory.find(:all).collect{ |c| [ c.name, c.id] }) %>
+        </p>
+        <p>
+          <%= f.label :book_url %>
+          <%= f.text_field :book_url %>
+        </p>
+        <p>
+          <%= f.label :author %>
+          <%= f.text_field :author %>
+        </p>
+        <p>
+          <%= f.label :description %>
+          <%= f.text_area :description, :rows => 3, :cols => 40 %>
+        </p>
+        <p>
+          <%= f.submit 'Update', :class => "submit" %>
+        </p>
+      </b>
+    <% end %>
+  </fieldset>
+</div>
+
+<b>
+  <%= link_to 'Show', @free_book %> |
+  <%= link_to 'Back', free_books_path %>
+</b>

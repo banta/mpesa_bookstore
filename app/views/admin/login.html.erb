@@ -1,0 +1,21 @@
+<h1>Administrator login</h1>
+<br/>
+<div class="bookstore-form">
+
+  <fieldset>
+    <legend>Please Login</legend>
+    <% form_tag do %>
+      <p>
+        <label for="email">E-mail:</label>
+        <%= text_field_tag :email, params[:email] %>
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <%= password_field_tag :password, params[:password] %>
+      </p>
+      <p>
+        <%= submit_tag "Login", :class => "submit" %>
+      </p>
+    <% end %>
+  </fieldset>
+</div>
